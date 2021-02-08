@@ -1,13 +1,3 @@
-# from logging import FileHandler
-# from vlogging import VisualRecord
-# from logging import getLogger, DEBUG
-# 
-# logger = getLogger("demo")
-# fh = FileHandler('test.html', mode="w")
-# 
-# logger.setLevel(DEBUG)
-# logger.addHandler(fh)
-
 # Import specific function in another file
 from functions import cat
 from dotenv import load_dotenv
@@ -34,7 +24,7 @@ model_max_iter = 3000000
 
 cpu_threads = -1
 
-CV = 2
+CV = 4
               
 bucket_name = 'ia-censo-tc'
 boxplot_cv_file = 'cv_models.png'
@@ -45,7 +35,7 @@ url = 'https://' + bucket_name + '.s3.us-east-2.amazonaws.com/'
 # Processamento de dados ####
 #==========================================================#
 #--------------------------------------------------------------------------------------------------#
-cat('Preprocess').print()
+cat('Preprocess', 'green').print()
 #----------------------------------------------------------#
 from os import environ
 from pandas import read_sql_table, notnull, concat
@@ -70,7 +60,7 @@ little = df[df['name'].groupby(df['name']).transform('size') < 10]
 
 appended = concat([little.drop_duplicates()] * 10,
                   ignore_index = False).sort_values(['name', 'name_detail'])
-                  
+
 df = df.append(appended, ignore_index = False)
 
 del appended, little
@@ -82,9 +72,9 @@ df.columns = ['name', 'name_detail']
 df['category_id'] = df['name'].factorize()[0]
 
 category_id_df = df[['name', 'category_id']].drop_duplicates().sort_values('category_id')
-    
+
 category_to_id = dict(category_id_df.values)
-    
+
 id_to_category = dict(category_id_df[['category_id', 'name']].values)
 #--------------------------------------------------------------------------------------------------#
 
@@ -97,10 +87,10 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 all_stopwords = stopwords.words('portuguese')
 
 all_stopwords.extend(stop_words)
-    
+
 tfidf = TfidfVectorizer(stop_words = all_stopwords,
                         min_df = tfidf_min_df,  ngram_range = tfidf_range)
-                                        
+
 features = tfidf.fit_transform(df.name_detail).toarray()
 
 labels = df.category_id
@@ -119,7 +109,7 @@ print(
 # Cross Validation + Model Evaluation ####
 #==========================================================#
 #--------------------------------------------------------------------------------------------------#
-cat('Cross Validation').print()
+cat('Cross Validation', 'green').print()
 #----------------------------------------------------------#
 from sklearn.model_selection import cross_val_score
 from sklearn.linear_model import LogisticRegression
@@ -131,14 +121,14 @@ from sklearn.model_selection import train_test_split
 X = df['name_detail'] # Collection of documents
 y = df['name'] # Target or the labels we want to predict (i.e., the 13 different complaints of products)
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, 
+X_train, X_test, y_train, y_test = train_test_split(X, y,
                                                     test_size = model_test_size,
                                                     random_state = model_random_state)
 
 models = [
     LogisticRegression(random_state = model_random_state,
                        max_iter = model_max_iter),
-    LinearSVC(random_state = model_random_state, 
+    LinearSVC(random_state = model_random_state,
               max_iter = model_max_iter),
     LinearSVC(dual = False,
               penalty = 'l2', loss = 'squared_hinge',
@@ -164,12 +154,12 @@ models_specs = [
 ]
 
 models_names = [
-  'LogisticReg', 
+  'LogisticReg',
   'SVC_Default',
   'SVC_F22',
   'SVC_F12',
   'SVC_T22',
-  'SVC_T21' 
+  'SVC_T21'
 ]
 
 cv_df = DataFrame(index=range(CV * len(models)))
@@ -179,11 +169,11 @@ entries = []
 for i, model in enumerate(models):
   model_name = models_names[i]
   model_spec = models_specs[i]
-  accuracies = cross_val_score(model, 
-                               features, 
-                               labels, 
+  accuracies = cross_val_score(model,
+                               features,
+                               labels,
                                scoring='accuracy',
-                               cv=CV, 
+                               cv=CV,
                                n_jobs = cpu_threads)
   for fold_idx, accuracy in enumerate(accuracies):
     entries.append((model_name, model_spec, fold_idx+1, accuracy))
@@ -214,10 +204,10 @@ from boto3 import resource
 from matplotlib.pyplot import savefig
 from seaborn import boxplot, stripplot
 #----------------------------------------------------------#
-boxplot(x='model_name', y='accuracy', data=cv_df)
+boxplot(x = 'model_name', y = 'accuracy', data = cv_df)
 
-stripplot(x='model_name', y='accuracy', data=cv_df,
-              size=8, jitter=True, edgecolor="gray", linewidth=2)
+stripplot(x = 'model_name', y = 'accuracy', data = cv_df,
+              size = 8, jitter = True, edgecolor = 'gray', linewidth = 2)
 
 # save the plot to a static folder
 savefig(boxplot_cv_file)
@@ -228,7 +218,7 @@ s3 = resource('s3')
 img_data = open(boxplot_cv_file, 'rb')
 s3.Bucket(bucket_name).put_object(Key = boxplot_cv_file, Body = img_data,
                                  ContentType = 'image/png', ACL = 'public-read')
-                                 
+
 if stat(boxplot_cv_file).st_size > 0:
   print('A imagem está disponível na url: ', url + boxplot_cv_file)
 #--------------------------------------------------------------------------------------------------#
@@ -242,8 +232,8 @@ from sklearn.svm import LinearSVC
 from sklearn.model_selection import train_test_split
 #----------------------------------------------------------#
 X_train, X_test, y_train, y_test, indices_train, indices_test = train_test_split(
-  features, 
-  labels, 
+  features,
+  labels,
   df.index,
   test_size = model_test_size,
   random_state = model_random_state
@@ -291,10 +281,10 @@ savefig(confusion_matrix_file)
 
 s3 = resource('s3')
 
-img_data = open(confusion_matrix_file, "rb")
+img_data = open(confusion_matrix_file, 'rb')
 s3.Bucket(bucket_name).put_object(Key = confusion_matrix_file, Body = img_data,
-                                 ContentType = "image/png", ACL = "public-read")
-                                 
+                                 ContentType = 'image/png', ACL = 'public-read')
+
 if stat(confusion_matrix_file).st_size > 0:
   print('A imagem está disponível na url: ', url + confusion_matrix_file)
 #--------------------------------------------------------------------------------------------------#
@@ -341,7 +331,7 @@ for name, category_id in sorted(category_to_id.items()):
 # Prediction ####
 #==========================================================#
 #--------------------------------------------------------------------------------------------------#
-cat('Calibrate').print()
+cat('Calibrate', 'green').print()
 #----------------------------------------------------------#
 from sklearn.calibration import CalibratedClassifierCV
 #----------------------------------------------------------#
@@ -359,13 +349,13 @@ fitted_vectorizer = tfidf.fit(X_train)
 tfidf_vectorizer_vectors = fitted_vectorizer.transform(X_train)
 
 SVC = LinearSVC(dual = model_dual,
-                penalty = model_penalty, 
-                loss = model_loss, 
+                penalty = model_penalty,
+                loss = model_loss,
                 random_state = model_random_state,
                 max_iter = model_max_iter)
-                
+
 calibrated_clf = CalibratedClassifierCV(SVC, cv = CV, n_jobs = cpu_threads)
-                
+
 calibrated_clf.fit(tfidf_vectorizer_vectors, y_train)
 
 #--------------------------------------------------------------------------------------------------#
@@ -380,14 +370,24 @@ course_to_predict = 'ecologia sustentavel'
 
 df_probs = DataFrame(calibrated_clf.predict_proba(fitted_vectorizer.transform([course_to_predict]))*100,
                       columns=category_id_df.name.values)
-                      
+
 result_df = df_trans(df_probs)
-                      
+
 print(result_df)
 #--------------------------------------------------------------------------------------------------#
 
 #--------------------------------------------------------------------------------------------------#
-cat("Save Model").print()
+cat('Pergunta', 'cyan').print()
+#----------------------------------------------------------#
+from functions import ask_user
+#----------------------------------------------------------#
+if not(ask_user('Deseja salvar o modelo?')):
+  print('Você decidiu não salvar o modelo no bucket' + bucket_name + ' do AWS...')
+  quit()
+#--------------------------------------------------------------------------------------------------#
+
+#--------------------------------------------------------------------------------------------------#
+cat('Save Model').print()
 #----------------------------------------------------------#
 from boto3 import resource
 from pickle import dumps
@@ -406,5 +406,19 @@ s3 = resource('s3')
 s3.Object(bucket_name, text_vec_filename).put(Body = text_vec_dump)
 s3.Object(bucket_name, text_clf_filename).put(Body = text_clf_dump)
 s3.Object(bucket_name, ids_filename).put(Body = ids_dump)
+#--------------------------------------------------------------------------------------------------#
+
+#--------------------------------------------------------------------------------------------------#
+cat('Save log').print()
+#----------------------------------------------------------#
+from boto3 import resource
+#----------------------------------------------------------#
+log_file = 'log.txt'
+
+s3 = resource('s3')
+
+log_data = open(log_file, 'rb')
+s3.Bucket(bucket_name).put_object(Key = log_file, Body = log_data,
+                                 ContentType = 'text/txt', ACL = 'public-read')
 #--------------------------------------------------------------------------------------------------#
 #==================================================================================================#
