@@ -52,10 +52,11 @@ AWS:
 
 ### Rotina principal
 
-Em seguida rodamos o script `train.py` com:
+Em seguida rodamos o script `train.py` com o função `tee` para exportar
+o log junto:
 
 ``` bash
-python3 train.py
+python3 train.py | tee log.txt
 ```
 
 ### Salvar modelo
