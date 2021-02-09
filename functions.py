@@ -15,14 +15,6 @@ class cat():
       print('\n')
     print(self.cat)
 
-def ask_user(question):
-    while "the answer is invalid":
-        reply = str(input(question+' (s/n): ')).lower().strip()
-        if reply[:1] == 's':
-            return True
-        if reply[:1] == 'n':
-            return False
-
 def df_trans(df):
   df = df.transpose().reset_index().rename(columns={'index':'name', 0:'prob'}).sort_values('prob', ascending = False).head(5)
   return df
