@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 Repositório para treinar o modelo de classificação de texto dos nomes de curso da mercadoedu, utilizando o algoritmo [TF-IDF](https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html) de 1 até 3 n-gramas e o classificador [LinearSVC](https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html) ambos da biblioteca [scikit-learn](https://scikit-learn.org/).
 
-# TOC
+# Table of Contents
 - [Preparação do ambiente](#prepação-do-ambiente)
   - [Baixando código](#baixando-código)
   - [Instalação das dependências](#instalação-das-dependências)
@@ -27,12 +27,9 @@ Repositório para treinar o modelo de classificação de texto dos nomes de curs
   - [Rotina principal](#rotina-principal)
   - [Salvar modelo](#salvar-modelo)
   
+# Rotinas
 
-## Preparação do ambiente
-
-### Baixando código
-
-Para clonar o repositório com as rotinas de treino e deploy do modelo use:
+Para clonar o repositório e visualizar as rotinas utilize os comandos abaixo conforme o gif:
 
 ```{bash eval=FALSE, echo=TRUE}
 
@@ -40,34 +37,24 @@ git clone https://github.com/fcsestme/mercadoedu.tc.git
 
 ```
 
-### Instalação das dependências
+# Rotina principal
 
-Instale as dependências rodando o script `deps.sh` com:
+## Depedências
+### Atualizando ubuntu e as dependências necessárias
+### Instalando bibliotecas necessárias em python e as stopwords
+### Definindo variáveis de ambiente
+### Definindo credenciais do AWS
 
-```{bash eval=FALSE, echo=TRUE}
+## Avaliação dos modelos e treino
+### Préprocessamento
+### Validação Cruzada
+### Avaliação de Modelos
+### Treino
+### Exportação de Modelos
 
-./deps.sh
+## Exportação dos Gráficos
+### Gráfico da Validação Cruzada
+### Gráfico da Matriz de Confusão
+### Log
 
-```
-
-### Variáveis de ambiente
-
-Defina as variáveis de ambiente em .env e depois as chaves de acesso ao AWS:
-
-## Análise com aprendizado de máquina
-
-### Rotina principal
-
-Em seguida rodamos o script `train.py` com o função `tee` para exportar o log junto:
-
-```{bash eval=FALSE, echo=TRUE}
-
-python3 train.py | tee log.txt
-
-```
-
-### Salvar modelo
-
-
-Ao final do script você pode definir se deseja salvar o modelo treinado no bucket do AWS S3.
-
+## Limpeza dos arquivos temporários

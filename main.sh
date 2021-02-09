@@ -7,9 +7,11 @@ echo -e "\n\n
 | O que deseja fazer?                          |
 |					       |
 | 1) Instalar dependencias                     |
-| 2) Treinar modelo                            |
-| 3) Exportar imagens e log para o S3          |
-| 4) Limpar arquivos temporários               |
+| 2) Definir variáveis de ambiente             |
+| 3) Autenticação no AWS                       |
+| 4) Treinar modelo                            |
+| 5) Exportar imagens e log para o S3          |
+| 6) Limpar arquivos temporários               |
 |                                              |
 | 9) Fechar terminal                           |
 | 0) Continuar no terminal                     |
@@ -29,19 +31,27 @@ read -e -p " — Eu escolho a opcao: " choice
 
 # Conditional to open R Studio
 if [ "$choice" == "1" ]; then
-	./deps.sh && sleep 2 && ask_user
+	./scripts/deps.sh && sleep 1 && ask_user
 
-# Conditional to open R in Terminal
+# Conditional to open R Studio
 elif [ "$choice" == "2" ]; then
-	sudo python3 'train.py' | tee log.txt && sleep 2 && ask_user
+	./scripts/env.sh && sleep 1 && ask_user
 
 # Conditional to open R Studio
 elif [ "$choice" == "3" ]; then
-	sudo python3 'exports.py' && sleep 2 && ask_user
+	./scripts/auth.sh && sleep 1 && ask_user
 
 # Conditional to open R in Terminal
 elif [ "$choice" == "4" ]; then
-	sudo python3 'clear.py' && sleep 2 && ask_user
+	sudo python3 './Python/train.py' | tee log.txt && sleep 1 && ask_user
+
+# Conditional to open R Studio
+elif [ "$choice" == "5" ]; then
+	sudo python3 './Python/exports.py' && sleep 1 && ask_user
+
+# Conditional to open R in Terminal
+elif [ "$choice" == "6" ]; then
+	sudo python3 './Python/clear.py' && sleep 1 && ask_user
 
 # Conditional to exit
 elif [ "$choice" == "0" ]; then
@@ -49,7 +59,7 @@ elif [ "$choice" == "0" ]; then
 
 # Conditional to exit
 elif [ "$choice" == "9" ]; then
-	clear; exit 0
+	clear; exit 0;
 
 # Conditional to ask again
 else

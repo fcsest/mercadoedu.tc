@@ -9,9 +9,3 @@ sudo pip3 install scikit-learn seaborn matplotlib boto3 python-dotenv pandas sql
 sudo python3 -c "import nltk
 nltk.download('stopwords')
 quit()"
-
-touch .env
-
-nano .env
-
-aws configure
