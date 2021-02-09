@@ -15,7 +15,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 load_dotenv()
 
 database = 'course_names'
-cutted = True
 
 stop_words = ['curso',
               'superior',
@@ -39,9 +38,6 @@ engine_string = 'postgresql://{user}:{password}@{host}:{port}/{database}'.format
 eng = create_engine(engine_string)
 
 df = read_sql_table(database, eng).sort_values(['name', 'name_detail'])
-
-if cutted:
-  df = df.loc[4012:20871]
 
 little = df[df['name'].groupby(df['name']).transform('size') < 10]
 
