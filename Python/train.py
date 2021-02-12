@@ -20,8 +20,9 @@ stop_words = ['curso',
               'superior',
               'tecnologia',
               'abi',
-              'ead']
-tfidf_min_df = 2
+              'ead',
+              'cst']
+tfidf_min_df = 1
 tfidf_range = (1,3)
 
 #==========================================================#
@@ -38,15 +39,6 @@ engine_string = 'postgresql://{user}:{password}@{host}:{port}/{database}'.format
 eng = create_engine(engine_string)
 
 df = read_sql_table(database, eng).sort_values(['name', 'name_detail'])
-
-little = df[df['name'].groupby(df['name']).transform('size') < 10]
-
-appended = concat([little.drop_duplicates()] * 10,
-                  ignore_index = False).sort_values(['name', 'name_detail'])
-
-df = df.append(appended, ignore_index = False)
-
-del appended, little
 
 col = ['name', 'name_detail']
 df = df[col]
@@ -104,13 +96,13 @@ from sklearn.model_selection import cross_val_score, train_test_split
 model_test_size = 0.3
 model_random_state = 1
 model_loss = 'squared_hinge'
-model_penalty = 'l2'
+model_penalty = 'l1'
 model_dual = False
 model_max_iter = 3000000
 
 cpu_threads = -1
 
-CV = 10
+CV = 8
 
 boxplot_cv_file = 'cv_models.png'
 confusion_matrix_file = 'confusion_matrix.png'
@@ -229,9 +221,7 @@ model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 
 print('\t\t\t\tMétricas da classificação\n',
-      classification_report(y_test,
-                            y_pred, 
-                            target_names = df['name'].unique()))
+      classification_report(y_test, y_pred))
 #==========================================================#
 
 #==========================================================#
@@ -243,7 +233,7 @@ conf_mat = confusion_matrix(y_test,
 
 conf_mat.shape
 
-fig, ax = subplots(figsize=(60, 60))
+fig, ax = subplots(figsize=(90, 90))
 
 heatmap(conf_mat,
         annot = True,
@@ -264,7 +254,7 @@ cat('Wrong Matches').print()
 #----------------------------------------------------------#
 for predicted in category_id_df.category_id:
   for actual in category_id_df.category_id:
-    if predicted != actual and conf_mat[actual, predicted] >= 2:
+    if predicted != actual and conf_mat[actual, predicted] >= 1:
       print('"{}" foi predito como "{}" : {} exemplos.'.format(id_to_category[actual],
                                                                id_to_category[predicted],
                                                                conf_mat[actual, predicted]))

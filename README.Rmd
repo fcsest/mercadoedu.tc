@@ -27,17 +27,21 @@ Repositório para treinar o modelo de classificação de texto dos nomes de curs
   - [Rotina principal](#rotina-principal)
   - [Salvar modelo](#salvar-modelo)
   
-# Rotinas
+# Clone do repositório
 
 Para clonar o repositório e visualizar as rotinas utilize os comandos abaixo conforme o gif:
 
 ```{bash eval=FALSE, echo=TRUE}
+git clone https://github.com/fcsestme/mercadoedu.tc.git]
 
-git clone https://github.com/fcsestme/mercadoedu.tc.git
+cd mercadoedu.tc
 
+ls
 ```
 
 # Rotina principal
+
+Temos um script principal com a rotina 
 
 ## Depedências
 ### Atualizando ubuntu e as dependências necessárias
