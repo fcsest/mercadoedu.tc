@@ -24,6 +24,7 @@
 # RStudio files
 .Rproj.user/
 .aws/
+virtualenvs/
 __pycache__/
 
 
@@ -40,6 +41,7 @@ __pycache__/*.pyc
 /cache/
 /__pycache__/
 /.aws/
+/virtualenvs/
 
 # Temporary files created by R markdown
 *.utf8.md
@@ -48,6 +50,6 @@ __pycache__/*.pyc
 *.csv
 *.Rproj
 
-# R Environment Variables
+# R and Python Environment Variables
 .Renviron
 .env

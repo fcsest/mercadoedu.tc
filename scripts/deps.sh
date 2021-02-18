@@ -1,11 +1,21 @@
-sudo apt update
+sudo su
+apt install software-properties-common
+add-apt-repository ppa:deadsnakes/ppa
 
-sudo apt upgrade
+apt update
+apt upgrade -y
 
-sudo apt install python3-pip
+apt install python3.8 python3-pip virtualenv
 
-sudo pip3 install scikit-learn seaborn matplotlib boto3 python-dotenv pandas sqlalchemy psycopg2 nltk numpy IPython pyfiglet ansicolors awscli
+update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 1
+update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 2
 
-sudo python3 -c "import nltk
+virtualenv -p python3.8 ~/.virtualenvs/text_class
+
+source ~/.virtualenvs/text_class/bin/activate
+
+python3.8 -m pip install -r ./requirements.txt
+
+python3.8 -c "import nltk
 nltk.download('stopwords')
 quit()"
