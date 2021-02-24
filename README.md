@@ -1,11 +1,8 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 <a href="https://mercadoedu.com.br">
 <img src="./inst/readme/images/slogan.png" align = "left" height = "59px"/>
-</a>
-
-<span style="display:inline-block; width: 450px;"></span>
-
-<a href="https://tawk.to/fcs.est">
+</a> <a href="https://tawk.to/fcs.est">
 <img src="./inst/readme/images/perfil.png" align = "right" height = "100px"/>
 </a>
 
@@ -81,16 +78,7 @@ A primeira opção(`1`) irá instalar as dependências necessárias para
 rodar todas as demais rotinas.
 
 Abaixo você pode conferir o passo a passo dessa rotina de instalação de
-dependências. sudo apt install software-properties-common sudo
-add-apt-repository ppa:deadsnakes/ppa -y
-
-sudo apt update sudo apt upgrade -y
-
-sudo apt install python3-pip -y
-
-python3 -m pip install -r ./requirements.txt
-
-python3 -c “import nltk; nltk.download(‘stopwords’)”
+dependências.
 
 #### Atualizando Ubuntu
 
