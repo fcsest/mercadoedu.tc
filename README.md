@@ -24,14 +24,14 @@ code span.st {
 <div>
 
 <a href="https://mercadoedu.com.br">
-<img src="../readme/images/slogan.png" align = "left" height = "59px"/>
+<img src="./inst/readme/images/slogan.png" align = "left" height = "59px"/>
 </a>
 
 </div>
 
 <span style="display:inline-block; width: 450px;"></span>
 <a href="https://tawk.to/fcs.est">
-<img src="../readme/images/perfil.png" align = "rigth" height = "100px"/>
+<img src="./inst/readme/images/perfil.png" align = "rigth" height = "100px"/>
 </a>
 
 # Text Classification
