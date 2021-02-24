@@ -6,7 +6,7 @@
 <span style="display:inline-block; width: 450px;"></span>
 
 <a href="https://tawk.to/fcs.est">
-<img src="./inst/readme/images/perfil.png" align = "rigth" height = "100px"/>
+<img src="./inst/readme/images/perfil.png" align = "right" height = "100px"/>
 </a>
 
 # Text Classification
