@@ -61,9 +61,11 @@ all_stopwords = stopwords.words("portuguese")
 all_stopwords.extend(stop_words)
 
 tfidf = TfidfVectorizer(stop_words = all_stopwords,
-                        min_df = tfidf_min_df,  ngram_range = tfidf_range)
+                        min_df = 2,  ngram_range = (1,3))
 
-features = tfidf.fit_transform(df.name_detail).toarray()
+features = tfidf.fit_transform(df.name_detail)
+
+features2 = features.toarray()
 
 labels = df.category_id
 
@@ -74,6 +76,9 @@ print(
   f"agregado de cada curso, ou seja...\nTemos {features.shape[1]} unigramas, bigramas e trigramas",
   "que representam os nomes agregados de curso."
   )
+  
+features
+features2
 #==========================================================#
 #==================================================================================================#
 

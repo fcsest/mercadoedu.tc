@@ -3,23 +3,22 @@ function ask_user() {
 
 # Message with choices informations
 echo -e "\n\n
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-| O que deseja fazer?                          |
-|					       |
-| 1) Instalar dependencias                     |
-| 2) Definir variáveis de ambiente             |
-| 3) Autenticação no AWS                       |
-| 4) Treinar modelo                            |
-| 5) Exportar imagens e log para o S3          |
-| 6) Limpar arquivos temporários               |
-|                                              |
-| 9) Fechar terminal                           |
-| 0) Continuar no terminal                     |
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-|					       |
-| Digite um numero para escolher uma opcao...  |
-|					       |
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#\n"
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+| O que deseja fazer?                            |
+|					         |
+| 1) (first time) Instalar dependencias          |
+| 2) (first time) Definir variáveis de ambiente  |
+| 3) (first time) Definir autenticação do AWS    |
+| 4) (daily) Treinar modelos                     |
+| 5) (weekly) Avaliar modelos                    |
+|                                                |
+| 9) Fechar terminal                             |
+| 0) Continuar no terminal                       |
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+|					         |
+| Digite um numero para escolher uma opcao...    |
+|					         |
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#\n"
 
 # Display a message if select undefined choices
 if [ "$AGAIN" == "1" ]; then
@@ -29,37 +28,33 @@ fi
 # Input of user choice
 read -e -p " — Eu escolho a opcao: " choice
 
-# Conditional to open R Studio
+# Conditional to install depedencies
 if [ "$choice" == "1" ]; then
 	./scripts/deps.sh && sleep 1 && ask_user
 
-# Conditional to open R Studio
+# Conditional to define environment variables
 elif [ "$choice" == "2" ]; then
 	./scripts/env.sh && sleep 1 && ask_user
 
-# Conditional to open R Studio
+# Conditional to define autorization keys of AWS
 elif [ "$choice" == "3" ]; then
 	./scripts/auth.sh && sleep 1 && ask_user
 
-# Conditional to open R in Terminal
+# Conditional to run a daily train
 elif [ "$choice" == "4" ]; then
-	sudo python3 './Python/train.py' | tee log.txt && sleep 1 && ask_user
+	sudo python3.8 './python/daily_train.py' | tee log_daily_`date +%d-%m-%y`.txt && sleep 1 && ask_user
 
-# Conditional to open R Studio
+# Conditional to run a weekly check
 elif [ "$choice" == "5" ]; then
-	sudo python3 './Python/exports.py' && sleep 1 && ask_user
+	sudo python3.8 './python/weekly_check.py' | tee log_weekly_`date +%d-%m-%y`.txt && sleep 1 && ask_user
 
-# Conditional to open R in Terminal
-elif [ "$choice" == "6" ]; then
-	sudo python3 './Python/clear.py' && sleep 1 && ask_user
-
-# Conditional to exit
+# Conditional to exit menu
 elif [ "$choice" == "0" ]; then
   exit;
 
-# Conditional to exit
+# Conditional to exit console
 elif [ "$choice" == "9" ]; then
-	clear; exit 0;
+	clear; exit; exit 0;
 
 # Conditional to ask again
 else

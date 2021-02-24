@@ -40,6 +40,7 @@ __pycache__/*.pyc
 *_cache/
 /cache/
 /__pycache__/
+*/__pycache__/
 /.aws/
 /virtualenvs/
 

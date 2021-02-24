@@ -1,21 +1,23 @@
-sudo su
-apt install software-properties-common
-add-apt-repository ppa:deadsnakes/ppa
+if [[ $(lsb_release -rs) == "20.04" ]]; then
+  echo "Instalando dependências para o Ubuntu 20.04"
+  sudo apt install software-properties-common
+  sudo add-apt-repository ppa:deadsnakes/ppa -y
 
-apt update
-apt upgrade -y
+  sudo apt update
+  sudo apt upgrade -y
 
-apt install python3.8 python3-pip virtualenv
+  sudo apt install python3-pip -y
 
-update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 1
-update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 2
+  python3 -m pip install -r ./requirements.txt
 
-virtualenv -p python3.8 ~/.virtualenvs/text_class
+  python3 -c "import nltk; nltk.download('stopwords')"
 
-source ~/.virtualenvs/text_class/bin/activate
+# Conditional to exit
+elif [[ $(lsb_release -rs) == "18.04" ]]; then
+	echo "O script de instalção das dependências ainda não é compatível com o Ubuntu 18.04,
+	o sistema operacional deve ser Ubuntu 20.04"
 
-python3.8 -m pip install -r ./requirements.txt
+else
+       echo "O sistema operacional recomendado é o Ubuntu 20.04"
+fi
 
-python3.8 -c "import nltk
-nltk.download('stopwords')
-quit()"
