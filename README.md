@@ -1,35 +1,10 @@
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-<style type="text/css">
-.author,.title{
-    display: none;
-}
-h1{
-  margin-top: -50px;
-}
-code span.co {
-    color: #9897c7;
-    font-weight: normal;
-    font-style: italic;
-}
-code span.kw {
-    color: #10aff2;
-    font-weight: bold;
-}
-code span.st {
-    color: #09e2c5;
-}
-</style>
-
-<div>
-
 <a href="https://mercadoedu.com.br">
 <img src="./inst/readme/images/slogan.png" align = "left" height = "59px"/>
 </a>
 
-</div>
-
 <span style="display:inline-block; width: 450px;"></span>
+
 <a href="https://tawk.to/fcs.est">
 <img src="./inst/readme/images/perfil.png" align = "rigth" height = "100px"/>
 </a>
