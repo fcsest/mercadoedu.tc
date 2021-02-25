@@ -39,6 +39,13 @@ rmarkdown::render(here::here("inst",
                   "github_document",
                   output_file = here::here("README.md"))
 
+readLines(here::here("README.md"),
+          encoding = "UTF-8") %>%
+  vctrs::vec_slice(21:length(.)) %>%
+  stringr::str_conv(encoding = "UTF-8") %>%
+  writeLines(con = here::here("README.md"))
+
+
 file.remove(here::here("inst",
                        "readme",
                        "README_md.Rmd"))
