@@ -1,4 +1,5 @@
 ---
+title: "Text Classification"
 output: github_document
 ---
 
@@ -74,14 +75,13 @@ code span.st {
 ```
 
 <a href="https://mercadoedu.com.br">
-    <img src="./inst/readme/images/slogan.png" align = "left" height = "59px"/>
+    <img src="./images/slogan.png" align = "left" height = "59px"/>
 </a>
 <a href="https://tawk.to/fcs.est">
-  <img src="./inst/readme/images/perfil.png" align = "right" height = "100px"/>
+  <img src="./images/perfil.png" align = "right" height = "100px"/>
 </a>
 
-# Text Classification
-
+<h1 align = "center"> Text Classification</h1>
 
 <!-- badges: start -->
 ![Development Status](https://img.shields.io/badge/lifecycle-experimental-orange.svg)
