@@ -1,5 +1,3 @@
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
 <a href="https://mercadoedu.com.br">
 <img src="./inst/readme/images/slogan.png" align = "left" height = "59px"/>
 </a> <a href="https://tawk.to/fcs.est">
@@ -14,25 +12,41 @@
 Status](https://img.shields.io/badge/lifecycle-experimental-orange.svg)
 <!-- badges: end -->
 
-Repositório para treinar o modelo de classificação de texto dos nomes de
-curso da mercadoedu, utilizando o algoritmo
+Repositório do modelo de classificação de texto dos nomes de curso da
+mercadoedu, utilizando o algoritmo
 [TF-IDF](https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html)
-de 1 até 3 n-gramas e o classificador
-[LinearSVC](https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html)
-ambos da biblioteca [scikit-learn](https://scikit-learn.org/).
+da biblioteca [scikit-learn](https://scikit-learn.org/).
 
-## Table of Contents
+# Sumário
 
--   [Preparação do ambiente](#prepação-do-ambiente)
-    -   [Baixando código](#baixando-código)
-    -   [Instalação das dependências](#instalação-das-dependências)
+-   [Clonando repositório](#clonando-repositório)
+-   [Rotina principal](#rotina-principal)
+    -   [Depedências](#depedências)
+        -   [Atualizando Ubuntu](#atualizando-ubuntu)
+        -   [Atualizando Python](#atualizando-python)
+        -   [Instalando bibliotecas em
+            Python](#instalando-bibliotecas-em-python)
+        -   [Baixando as stopwords em
+            Português](#baixando-as-stopwords-em-português)
     -   [Variáveis de ambiente](#variáveis-de-ambiente)
--   [Análise com aprendizado de
-    máquina](#análise-com-aprendizado-de-máquina)
-    -   [Rotina principal](#rotina-principal)
-    -   [Salvar modelo](#salvar-modelo)
+    -   [Autenticação do AWS](#autenticação-do-aws)
+    -   [Treinamento dos modelos](#treinamento-dos-modelos)
+        -   [Pré-processamento](#pré-processamento)
+        -   [Vetorização](#vetorização)
+        -   [Classificador](#classificador)
+        -   [Deploy](#deploy)
+    -   [Avaliação dos modelos](#avaliação-dos-modelos)
+        -   [Pré-processamento](#pré-processamento)
+        -   [Extração de features](#extração-de-features)
+        -   [Seleção de features](#seleção-de-features)
+        -   [Seleção de modelos](#seleção-de-modelos)
+        -   [Avaliação do modelo](#avaliação-do-modelo)
+        -   [Explicabilidade do modelo](#explicabilidade-do-modelo)
+        -   [Complexidade vs
+            interpretabilidade](#complexidade-vs-interpretabilidade)
+-   [Referências](#referências)
 
-## Clone do repositório
+## Clonando repositório
 
 Para clonar o repositório e visualizar as rotinas utilize os comandos
 abaixo conforme o gif:
@@ -128,7 +142,7 @@ e o formato de saída padrão(por padrão seria `json`).
 
 #### Complexidade vs interpretabilidade
 
-# Referências
+## Referências
 
 Todo código contido neste projeto foi desenvolvido a partir das
 referências abaixo:
