@@ -22,7 +22,7 @@ stop_words = ["curso",
               "abi",
               "ead",
               "cst"]
-tfidf_min_df = 2
+tfidf_min_df = 1
 tfidf_range = (1,3)
 
 #==========================================================#
@@ -61,7 +61,7 @@ all_stopwords = stopwords.words("portuguese")
 all_stopwords.extend(stop_words)
 
 tfidf = TfidfVectorizer(stop_words = all_stopwords,
-                        min_df = 2,  ngram_range = (1,3))
+                        min_df = 1,  ngram_range = (1,3))
 
 features = tfidf.fit_transform(df.name_detail)
 
@@ -100,14 +100,14 @@ from sklearn.model_selection import cross_val_score, train_test_split
 
 model_test_size = 0.3
 model_random_state = 1
-model_loss = "squared_hinge"
 model_penalty = "l1"
+model_loss = "squared_hinge"
 model_dual = False
 model_max_iter = 3000000
 
 cpu_threads = -1
 
-CV = 5
+CV = 4
 
 boxplot_cv_file = "cv_models.png"
 confusion_matrix_file = "confusion_matrix.png"
@@ -187,7 +187,7 @@ mean_accuracy = cv_df.groupby("model_name").accuracy.mean()
 std_accuracy = cv_df.groupby("model_name").accuracy.std()
 
 acc = concat([mean_accuracy, std_accuracy], axis= 1,
-          ignore_index=True)
+          ignore_index=True).sort_values(1, ascending = True).sort_values(0, ascending = False)
           
 acc.columns = ["Acurácia média", "Desvio padrão"]
 

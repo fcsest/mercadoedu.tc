@@ -1,12 +1,7 @@
 # Append python folder to import functions.py 
-from sys.path import append
 sys.path.append('./python/')
 from functions import cat
 
-#==================================================================================================#
-# Weekly Check ####
-cat("Weekly Check", "green").print()
-#--------------------------------------------------------------------------------------------------#
 from os import environ
 from dotenv import load_dotenv
 from python.functions import df_trans
@@ -16,17 +11,6 @@ from pandas import read_sql_table, notnull, concat
 load_dotenv()
 
 database = "course_names"
-
-stop_words = ["curso",
-              "superior",
-              "tecnologia",
-              "abi",
-              "ead",
-              "cst"]
-              
-tfidf_min_df = 1
-
-tfidf_range = (1,3)
 
 #==========================================================#
 cat("Import/Format").print()
@@ -43,16 +27,19 @@ eng = create_engine(engine_string)
 
 df = read_sql_table(database, eng).sort_values(["name", "name_detail"])
 
-col = ["name", "name_detail"]
-df = df[col]
-df = df[notnull(df["name_detail"])]
-df.columns = ["name", "name_detail"]
-df["category_id"] = df["name"].factorize()[0]
+df.groupby(by="name")["name_detail"].agg(
+        [
+            ("count", lambda x: x.size)
+        ]
+    ).reset_index().sort_values(by="count", ascending=False)
 
-category_id_df = df[["name", "category_id"]].drop_duplicates().sort_values("category_id")
+from PyHighcharts import Chart, ChartTypes
+import PyHighcharts
+# A chart is the container that your data will be rendered in, it can (obviously) support multiple data series within it.
+chart = Chart()
 
-category_to_id = dict(category_id_df.values)
+# Adding a series requires a minimum of two arguments, the series type and an array of data points
+chart.add_data_series(ChartTypes.Spline, df["count"], "Example Series")
 
-id_to_category = dict(category_id_df[["category_id", "name"]].values)
-#==========================================================#
-cat("Weekly Check", "cyan").print()
+# This will open up a browser window and display the chart on the page
+chart.show()

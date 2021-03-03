@@ -6,7 +6,7 @@ if [[ $(lsb_release -rs) == "20.04" ]]; then
   sudo apt update
   sudo apt upgrade -y
 
-  sudo apt install python3-pip -y
+  sudo apt install python3-pip libpq-dev awscli -y
 
   python3 -m pip install -r ./requirements.txt
 
