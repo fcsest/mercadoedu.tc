@@ -1,0 +1,75 @@
+---
+title: 'Relatório da classificação de texto'
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: scroll
+    social: menu
+    source: embed
+    logo: ./images/slogan.png
+    favicon: ./images/slogan.png
+    includes:
+      after_body: ./partials/footer.html
+
+knit: (function(input, ...) {
+    writeLines(paste(htmltools::tags$div(htmltools::HTML("<footer><small><b>Relatório gerado às ",
+                                                            paste(format(Sys.time(),
+                                                                   "%H:%M do dia %d de %B."))," &copy; Fernando Souza, mercadoedu, 2021.</b></small></footer>"))), "./partials/footer.html")
+    
+    xfun::dir_create(
+      paste0(
+        stringr::str_replace(
+          xfun::sans_ext(input),
+          '/inst/report/index',
+          paste0('/docs/report/',
+                 format(Sys.Date(), '%Y/%m/')
+          )
+        )
+      )
+    )
+
+    rmarkdown::render(
+      input,
+      output_file = paste0(
+        stringr::str_replace(xfun::sans_ext(input),
+                             '/inst/report/',
+                             paste0('/docs/report/',
+                                    format(Sys.Date(),
+                                           "%Y/%m/"))),
+        '-',
+        Sys.Date(),
+               '.html'
+      ),
+      envir = globalenv()
+    )
+  })
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+```
+
+Início
+=====================================
+
+#### Em desenvolvimento...
+
+Gráficos gerais {data-navmenu="EDA"}
+=====================================
+
+#### Em desenvolvimento...
+
+Nuvens de Palavras {data-navmenu="EDA"}
+=====================================
+
+#### Em desenvolvimento...
+
+Seleção do modelo
+=====================================
+
+#### Em desenvolvimento
+
+Avaliação do modelo
+=====================================
+
+#### Em desenvolvimento
