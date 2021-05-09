@@ -42,11 +42,11 @@ elif [ "$choice" == "3" ]; then
 
 # Conditional to run a daily train
 elif [ "$choice" == "4" ]; then
-	sudo python3.8 './python/daily_train.py' | tee log_daily_`date +%d-%m-%y`.txt && sleep 1 && ask_user
+	sudo python3.8 'python/daily_train.py' | tee log_daily_`date +%d-%m-%y`.txt && sleep 1 && ask_user
 
 # Conditional to run a weekly check
 elif [ "$choice" == "5" ]; then
-	sudo python3.8 './python/weekly_check.py' | tee log_weekly_`date +%d-%m-%y`.txt && sleep 1 && ask_user
+	sudo python3.8 'python/weekly_check.py' | tee log_weekly_`date +%d-%m-%y`.txt && sleep 1 && ask_user
 
 # Conditional to exit menu
 elif [ "$choice" == "0" ]; then

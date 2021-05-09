@@ -1,0 +1,159 @@
+---
+title: 'Relatório da classificação de texto'
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    # vertical_layout: scroll
+    social: menu
+    source: embed
+    logo: ./images/slogan.png
+    favicon: ./images/slogan.png
+    includes:
+      after_body: ./partials/footer.html
+
+knit: (function(input, ...) {
+    writeLines(paste(htmltools::tags$div(htmltools::HTML("<footer><small><b>Relatório gerado às ",
+                                                            paste(format(Sys.time(),
+                                                                   "%H:%M do dia %d de %B de %Y"))," &copy; Fernando Souza, mercadoedu.</b></small></footer>"))), "./partials/footer.html")
+    
+    xfun::dir_create(
+      paste0(
+        stringr::str_replace(
+          xfun::sans_ext(input),
+          '/inst/report/tc_report',
+          paste0('/docs/report/',
+                 format(Sys.Date(), '%Y/%m/')
+          )
+        )
+      )
+    )
+
+    rmarkdown::render(
+      input,
+      output_file = paste0(
+        stringr::str_replace(xfun::sans_ext(input),
+                             '/inst/report/',
+                             paste0('/docs/report/',
+                                    format(Sys.Date(),
+                                           "%Y/%m/"))),
+        '-',
+        Sys.Date(),
+               '.html'
+      ),
+      envir = globalenv()
+    )
+  })
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(magrittr)
+```
+
+Início
+=====================================
+
+### Diagrama Geral da Classificação de Texto
+
+Este relatório tem como objetivo explicar o modelo de classificação de texto utilizado para criar o vínculo entre os cursos coletados da web com os nomes de cursos agregados.
+
+<div>
+<img src = "./images/Text Classification.png" style = "float: center; width: 100%; height: 100%;"/>
+</div>
+
+### Relatório
+
+#### EDA
+
+A análise exploratória tem por objetivo descrever como está os dados de cada nome de curso agregado no banco utilizado para treinar o modelo de classificação.
+
+##### Gráfico geral
+
+Utilizamos gráficos de barras separados pela letra inicial de cada nome de curso agregado para melhor visualização com as seguintes métricas:
+- Número de nomes detalhados para cada nome agregado
+
+- Número de nomes detalhados distintos para cada nome agregado
+
+- Porcentagem de nomes detalhados por nomes agregados
+
+- Média de comprimento dos nomes detalhados por nomes agregados
+
+
+##### Nuvem de palavras
+
+Separamos as nuvens de palavras com para cada um dos nomes de cursos agregados.
+
+#### Seleção de modelo
+
+Este relatório tem como objetivo explicar o modelo de classificação de texto utilizado para criar o vínculo entre os cursos coletados da web com os nomes de cursos agregados.
+
+#### Avaliação do modelo
+
+Este relatório tem como objetivo explicar o modelo de classificação de texto utilizado para criar o vínculo entre os cursos coletados da web com os nomes de cursos agregados.
+
+
+Gráficos gerais {.storyboard data-navmenu="Análise exploratória"}
+=====================================
+
+### Número de nomes detalhados para cada nome agregado
+
+```{r n_detail}
+```
+
+#### A
+
+#### B
+
+#### C
+
+### Número de nomes detalhados distintos para cada nome agregado
+
+#### A
+
+#### B
+
+#### C
+
+### Porcentagem de nomes detalhados por nomes agregados
+
+#### A
+
+#### B
+
+#### C
+
+### Média de comprimento dos nomes detalhados por nomes agregados
+
+#### A
+
+#### B
+
+#### C
+
+
+Nuvens de Palavras {.tabset .tabset-fade data-navmenu="Análise exploratória"}
+=====================================
+
+### Nuvens de Palavras 1
+
+#### Em desenvolvimento...
+
+### Nuvens de Palavras 2
+
+#### Em desenvolvimento...
+
+
+Seleção do modelo
+=====================================
+
+### Seleção do modelo
+
+#### Em desenvolvimento
+
+
+Avaliação do modelo
+=====================================
+
+### Avaliação do modelo
+
+#### Em desenvolvimento
