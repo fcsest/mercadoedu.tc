@@ -1,0 +1,33 @@
+Package: mercadoedu.tc
+Title: mercadoedu's Text Classification
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Fernando",
+           family = "Souza",
+           role = c("aut", "cre"),
+           email = "fcs.est@gmail.com")
+Description: All things necessary for the text classification with course
+    names.
+License: MIT + file LICENSE
+URL: https://fcsest.github.io/mercadoedu.tc, https://github.com/fcsest/mercadoedu.tc
+BugReports: https://github.com/fcsest/mercadoedu.tc/issues
+Depends: 
+    R (>= 4.1.0)
+Imports: 
+    dplyr,
+    httr,
+    janitor,
+    jsonlite,
+    purrr,
+    stringr,
+    rmarkdown
+VignetteBuilder: 
+    knitr
+Config/Needs/website:
+    usethis,
+    servr
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+SystemRequirements: pandoc
+

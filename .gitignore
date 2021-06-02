@@ -53,3 +53,5 @@ __pycache__/*.pyc
 # R and Python Environment Variables
 .Renviron
 .env
+inst/doc
+docs

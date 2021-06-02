@@ -190,132 +190,56 @@ code span.st {
 <h1 align="center">
 Text Classification
 </h1>
+<p>Repositório do modelo de classificação de texto dos nomes de cursos de graduação, utilizando o algoritmo <a href="https://textrecipes.tidymodels.org/reference/step_tfidf.html">TF-IDF</a> da biblioteca <a href="https://textrecipes.tidymodels.org/">textrecipes</a>.</p>
 <!-- badges: start -->
-<p><img src="data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTM4IiBoZWlnaHQ9IjIwIiByb2xlPSJpbWciIGFyaWEtbGFiZWw9ImxpZmVjeWNsZTogZXhwZXJpbWVudGFsIj48dGl0bGU+bGlmZWN5Y2xlOiBleHBlcmltZW50YWw8L3RpdGxlPjxsaW5lYXJHcmFkaWVudCBpZD0icyIgeDI9IjAiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNiYmIiIHN0b3Atb3BhY2l0eT0iLjEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3Atb3BhY2l0eT0iLjEiLz48L2xpbmVhckdyYWRpZW50PjxjbGlwUGF0aCBpZD0iciI+PHJlY3Qgd2lkdGg9IjEzOCIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNmZmYiLz48L2NsaXBQYXRoPjxnIGNsaXAtcGF0aD0idXJsKCNyKSI+PHJlY3Qgd2lkdGg9IjU1IiBoZWlnaHQ9IjIwIiBmaWxsPSIjNTU1Ii8+PHJlY3QgeD0iNTUiIHdpZHRoPSI4MyIgaGVpZ2h0PSIyMCIgZmlsbD0iI2ZlN2QzNyIvPjxyZWN0IHdpZHRoPSIxMzgiIGhlaWdodD0iMjAiIGZpbGw9InVybCgjcykiLz48L2c+PGcgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IlZlcmRhbmEsR2VuZXZhLERlamFWdSBTYW5zLHNhbnMtc2VyaWYiIHRleHQtcmVuZGVyaW5nPSJnZW9tZXRyaWNQcmVjaXNpb24iIGZvbnQtc2l6ZT0iMTEwIj48dGV4dCBhcmlhLWhpZGRlbj0idHJ1ZSIgeD0iMjg1IiB5PSIxNTAiIGZpbGw9IiMwMTAxMDEiIGZpbGwtb3BhY2l0eT0iLjMiIHRyYW5zZm9ybT0ic2NhbGUoLjEpIiB0ZXh0TGVuZ3RoPSI0NTAiPmxpZmVjeWNsZTwvdGV4dD48dGV4dCB4PSIyODUiIHk9IjE0MCIgdHJhbnNmb3JtPSJzY2FsZSguMSkiIGZpbGw9IiNmZmYiIHRleHRMZW5ndGg9IjQ1MCI+bGlmZWN5Y2xlPC90ZXh0Pjx0ZXh0IGFyaWEtaGlkZGVuPSJ0cnVlIiB4PSI5NTUiIHk9IjE1MCIgZmlsbD0iIzAxMDEwMSIgZmlsbC1vcGFjaXR5PSIuMyIgdHJhbnNmb3JtPSJzY2FsZSguMSkiIHRleHRMZW5ndGg9IjczMCI+ZXhwZXJpbWVudGFsPC90ZXh0Pjx0ZXh0IHg9Ijk1NSIgeT0iMTQwIiB0cmFuc2Zvcm09InNjYWxlKC4xKSIgZmlsbD0iI2ZmZiIgdGV4dExlbmd0aD0iNzMwIj5leHBlcmltZW50YWw8L3RleHQ+PC9nPjwvc3ZnPg==" alt="Development Status" /> <!-- badges: end --></p>
-<p>Repositório do modelo de classificação de texto dos nomes de curso da mercadoedu, utilizando o algoritmo <a href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html">TF-IDF</a> da biblioteca <a href="https://scikit-learn.org/">scikit-learn</a>.</p>
+<p><a href="https://github.com/fcsest/mercadoedu.tc"> <img src="data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTM4IiBoZWlnaHQ9IjIwIiByb2xlPSJpbWciIGFyaWEtbGFiZWw9ImxpZmVjeWNsZTogZXhwZXJpbWVudGFsIj48dGl0bGU+bGlmZWN5Y2xlOiBleHBlcmltZW50YWw8L3RpdGxlPjxsaW5lYXJHcmFkaWVudCBpZD0icyIgeDI9IjAiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNiYmIiIHN0b3Atb3BhY2l0eT0iLjEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3Atb3BhY2l0eT0iLjEiLz48L2xpbmVhckdyYWRpZW50PjxjbGlwUGF0aCBpZD0iciI+PHJlY3Qgd2lkdGg9IjEzOCIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNmZmYiLz48L2NsaXBQYXRoPjxnIGNsaXAtcGF0aD0idXJsKCNyKSI+PHJlY3Qgd2lkdGg9IjU1IiBoZWlnaHQ9IjIwIiBmaWxsPSIjNTU1Ii8+PHJlY3QgeD0iNTUiIHdpZHRoPSI4MyIgaGVpZ2h0PSIyMCIgZmlsbD0iI2ZlN2QzNyIvPjxyZWN0IHdpZHRoPSIxMzgiIGhlaWdodD0iMjAiIGZpbGw9InVybCgjcykiLz48L2c+PGcgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IlZlcmRhbmEsR2VuZXZhLERlamFWdSBTYW5zLHNhbnMtc2VyaWYiIHRleHQtcmVuZGVyaW5nPSJnZW9tZXRyaWNQcmVjaXNpb24iIGZvbnQtc2l6ZT0iMTEwIj48dGV4dCBhcmlhLWhpZGRlbj0idHJ1ZSIgeD0iMjg1IiB5PSIxNTAiIGZpbGw9IiMwMTAxMDEiIGZpbGwtb3BhY2l0eT0iLjMiIHRyYW5zZm9ybT0ic2NhbGUoLjEpIiB0ZXh0TGVuZ3RoPSI0NTAiPmxpZmVjeWNsZTwvdGV4dD48dGV4dCB4PSIyODUiIHk9IjE0MCIgdHJhbnNmb3JtPSJzY2FsZSguMSkiIGZpbGw9IiNmZmYiIHRleHRMZW5ndGg9IjQ1MCI+bGlmZWN5Y2xlPC90ZXh0Pjx0ZXh0IGFyaWEtaGlkZGVuPSJ0cnVlIiB4PSI5NTUiIHk9IjE1MCIgZmlsbD0iIzAxMDEwMSIgZmlsbC1vcGFjaXR5PSIuMyIgdHJhbnNmb3JtPSJzY2FsZSguMSkiIHRleHRMZW5ndGg9IjczMCI+ZXhwZXJpbWVudGFsPC90ZXh0Pjx0ZXh0IHg9Ijk1NSIgeT0iMTQwIiB0cmFuc2Zvcm09InNjYWxlKC4xKSIgZmlsbD0iI2ZmZiIgdGV4dExlbmd0aD0iNzMwIj5leHBlcmltZW50YWw8L3RleHQ+PC9nPjwvc3ZnPg==" align="right" style="margin-top: -15px; margin-right: 40px;" /> </a> <!-- badges: end --></p>
 <div id="sumário" class="section level1">
 <h1>Sumário</h1>
 <ul>
-<li><a href="#clonando-repositório">Clonando repositório</a></li>
-<li><a href="#rotina-principal">Rotina principal</a>
+<li><a href="#análise-exploratória">Análise exploratória</a>
 <ul>
-<li><a href="#depedências">Depedências</a>
-<ul>
-<li><a href="#atualizando-ubuntu">Atualizando Ubuntu</a></li>
-<li><a href="#atualizando-python">Atualizando Python</a></li>
-<li><a href="#instalando-bibliotecas-em-python">Instalando bibliotecas em Python</a></li>
-<li><a href="#baixando-as-stopwords-em-português">Baixando as stopwords em Português</a></li>
+<li><a href="#gráficos-gerais">Gráficos gerais</a></li>
+<li><a href="#nuvem-de-palavras">Nuvem de palavras</a></li>
 </ul></li>
-<li><a href="#variáveis-de-ambiente">Variáveis de ambiente</a></li>
-<li><a href="#autenticação-do-aws">Autenticação do AWS</a></li>
-<li><a href="#treinamento-dos-modelos">Treinamento dos modelos</a>
-<ul>
-<li><a href="#pré-processamento">Pré-processamento</a></li>
-<li><a href="#vetorização">Vetorização</a></li>
-<li><a href="#classificador">Classificador</a></li>
-<li><a href="#deploy">Deploy</a></li>
-</ul></li>
-<li><a href="#avaliação-dos-modelos">Avaliação dos modelos</a>
-<ul>
-<li><a href="#pré-processamento">Pré-processamento</a></li>
-<li><a href="#extração-de-features">Extração de features</a></li>
-<li><a href="#seleção-de-features">Seleção de features</a></li>
-<li><a href="#seleção-de-modelos">Seleção de modelos</a></li>
+<li><a href="#seleção-do-modelo">Seleção do modelo</a></li>
 <li><a href="#avaliação-do-modelo">Avaliação do modelo</a></li>
-<li><a href="#explicabilidade-do-modelo">Explicabilidade do modelo</a></li>
-<li><a href="#complexidade-vs-interpretabilidade">Complexidade vs interpretabilidade</a></li>
-</ul></li>
-</ul></li>
 <li><a href="#referências">Referências</a></li>
 </ul>
-<div id="clonando-repositório" class="section level2">
-<h2>Clonando repositório</h2>
-<p>Para clonar o repositório e visualizar as rotinas utilize os comandos abaixo conforme o gif:</p>
-<pre class="bash"><code>sudo git clone https://github.com/fcsestme/mercadoedu.tc.git]</code></pre>
-<pre class="bash"><code>sudo cd mercadoedu.tc
-
-ls</code></pre>
+<div id="análise-exploratória" class="section level2">
+<h2>Análise exploratória</h2>
+<div id="gráficos-gerais" class="section level3">
+<h3>Gráficos gerais</h3>
 </div>
-<div id="rotina-principal" class="section level2">
-<h2>Rotina principal</h2>
-<p>Temos a rotina principal chamada <code>./main.sh</code> que roda as demais rotinas contidas nas pastas <code>./python</code> e <code>./scripts</code>.</p>
-<p>Após entrarmos no diretório clonado, chamamos a rotina principal com o comando abaixo:</p>
-<pre class="bash"><code>./main.sh</code></pre>
-<p>Desta forma irá aparecer uma série de alternativas que irão rodar as demais rotinas necessárias e para escolher uma opção digite o respectivo número da escolha e pressione <code>Enter</code>.</p>
-<p>As três primeiras opções(<code>1</code>, <code>2</code> e <code>3</code>) só precisam ser rodadas na máquina pela primeira vez.</p>
-<p>As opções de <code>Treinar modelos</code> e <code>Avaliar modelos</code>(<code>4</code> e <code>5</code>) seriam duas rotinas, uma diária e uma semanal respectivamente.</p>
-<p>As últimas opções(<code>9</code> e <code>0</code>) são para sair do terminal e do menu respectivamente.</p>
-<div id="depedências" class="section level3">
-<h3>Depedências</h3>
-<p>A primeira opção(<code>1</code>) irá instalar as dependências necessárias para rodar todas as demais rotinas.</p>
-<p>Abaixo você pode conferir o passo a passo dessa rotina de instalação de dependências.</p>
-<div id="atualizando-ubuntu" class="section level4">
-<h4>Atualizando Ubuntu</h4>
-</div>
-<div id="atualizando-python" class="section level4">
-<h4>Atualizando Python</h4>
-</div>
-<div id="instalando-bibliotecas-em-python" class="section level4">
-<h4>Instalando bibliotecas em Python</h4>
-</div>
-<div id="baixando-as-stopwords-em-português" class="section level4">
-<h4>Baixando as stopwords em Português</h4>
+<div id="nuvem-de-palavras" class="section level3">
+<h3>Nuvem de palavras</h3>
 </div>
 </div>
-<div id="variáveis-de-ambiente" class="section level3">
-<h3>Variáveis de ambiente</h3>
-<p>A segunda opção(<code>2</code>) irá abrir um arquivo <code>./.env</code> para você definir as variáveis de ambiente.</p>
+<div id="seleção-do-modelo" class="section level2">
+<h2>Seleção do modelo</h2>
 </div>
-<div id="autenticação-do-aws" class="section level3">
-<h3>Autenticação do AWS</h3>
-<p>A terceira opção(<code>3</code>) irá rodar a função de configuração do AWS, para realizar a autenticação.</p>
-<p>Desta forma após selecioná-la, será solicitado o AWS Access Key ID, AWS Secret Access Key, o nome da região padrão(por padrão seria <code>us-east-2</code>) e o formato de saída padrão(por padrão seria <code>json</code>).</p>
-</div>
-<div id="treinamento-dos-modelos" class="section level3">
-<h3>Treinamento dos modelos</h3>
-<div id="pré-processamento" class="section level4">
-<h4>Pré-processamento</h4>
-</div>
-<div id="vetorização" class="section level4">
-<h4>Vetorização</h4>
-</div>
-<div id="classificador" class="section level4">
-<h4>Classificador</h4>
-</div>
-<div id="deploy" class="section level4">
-<h4>Deploy</h4>
-</div>
-</div>
-<div id="avaliação-dos-modelos" class="section level3">
-<h3>Avaliação dos modelos</h3>
-<div id="pré-processamento-1" class="section level4">
-<h4>Pré-processamento</h4>
-</div>
-<div id="extração-de-features" class="section level4">
-<h4>Extração de features</h4>
-</div>
-<div id="seleção-de-features" class="section level4">
-<h4>Seleção de features</h4>
-</div>
-<div id="seleção-de-modelos" class="section level4">
-<h4>Seleção de modelos</h4>
-</div>
-<div id="avaliação-do-modelo" class="section level4">
-<h4>Avaliação do modelo</h4>
-</div>
-<div id="explicabilidade-do-modelo" class="section level4">
-<h4>Explicabilidade do modelo</h4>
-</div>
-<div id="complexidade-vs-interpretabilidade" class="section level4">
-<h4>Complexidade vs interpretabilidade</h4>
-</div>
-</div>
+<div id="avaliação-do-modelo" class="section level2">
+<h2>Avaliação do modelo</h2>
 </div>
 <div id="referências" class="section level2">
 <h2>Referências</h2>
-<p>Todo código contido neste projeto foi desenvolvido a partir das referências abaixo:</p>
+<p>Todo este projeto foi desenvolvido a partir das referências abaixo:</p>
+<ul>
+<li>Artigos:
 <ul>
 <li><a href="https://reslan-tinawi.github.io/2020/05/26/text-classification-using-sklearn-and-nltk.html" class="uri">https://reslan-tinawi.github.io/2020/05/26/text-classification-using-sklearn-and-nltk.html</a></li>
+<li><a href="https://blog.rstudio.com/2021/04/08/model-monitoring-with-r-markdown/" class="uri">https://blog.rstudio.com/2021/04/08/model-monitoring-with-r-markdown/</a></li>
+</ul></li>
+<li>Vídeos:
+<ul>
+<li><a href="https://www.youtube.com/watch?v=J5gTzoRU9tc" class="uri">https://www.youtube.com/watch?v=J5gTzoRU9tc</a></li>
+<li><a href="https://www.youtube.com/watch?v=5dx3sKty7JY" class="uri">https://www.youtube.com/watch?v=5dx3sKty7JY</a></li>
+</ul></li>
+<li>Repositórios:
+<ul>
+<li><a href="https://github.com/Reslan-Tinawi/20-newsgroups-Text-Classification" class="uri">https://github.com/Reslan-Tinawi/20-newsgroups-Text-Classification</a></li>
+<li><a href="https://github.com/juliasilge/modelops-playground" class="uri">https://github.com/juliasilge/modelops-playground</a></li>
+<li><a href="https://github.com/curso-r/cafecomdados" class="uri">https://github.com/curso-r/cafecomdados</a></li>
+</ul></li>
 </ul>
 </div>
 </div>
