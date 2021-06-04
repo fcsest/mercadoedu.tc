@@ -49,26 +49,9 @@ render_toc <- function(
 }
 ```
 
-```{css, echo = FALSE}
-.author,.title{
-    display: none;
-}
-code span.co {
-    color: #9897c7;
-    font-weight: normal;
-    font-style: italic;
-}
-code span.kw {
-    color: #10aff2;
-    font-weight: bold;
-}
-code span.st {
-    color: #09e2c5;
-}
-```
-# Classificação de texto dos nomes de cursos
+# Classificação de texto
 
-Repositório do modelo de classificação de texto dos nomes de cursos de graduação, utilizando o algoritmo [TF-IDF](https://textrecipes.tidymodels.org/reference/step_tfidf.html) da biblioteca [textrecipes](https://textrecipes.tidymodels.org/).
+Repositório do modelo de classificação de texto dos nomes de cursos de graduação, utilizando a biblioteca [tidymodels](https://tidymodels.org/).
 
 <!-- badges: start -->
 
