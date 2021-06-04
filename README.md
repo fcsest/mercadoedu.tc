@@ -1,22 +1,5 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-<style type="text/css">
-.author,.title{
-    display: none;
-}
-code span.co {
-    color: #9897c7;
-    font-weight: normal;
-    font-style: italic;
-}
-code span.kw {
-    color: #10aff2;
-    font-weight: bold;
-}
-code span.st {
-    color: #09e2c5;
-}
-</style>
 
 <a href="https://mercadoedu.com.br">
 <img src="https://raw.githubusercontent.com/fcsest/mercadoedu.tc/main/inst/images/slogan.png" align = "left" height = "59px"/>
