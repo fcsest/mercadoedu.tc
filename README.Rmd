@@ -73,10 +73,10 @@ code span.st {
 ```
 
 <a href="https://mercadoedu.com.br">
-    <img src="./inst/images/slogan.png" align = "left" height = "59px"/>
+    <img src="https://raw.githubusercontent.com/fcsest/mercadoedu.tc/main/inst/images/slogan.png" align = "left" height = "59px"/>
 </a>
 <a href="https://tawk.to/fcs.est">
-  <img src="./inst/images/perfil.png" align = "right" height = "100px"/>
+  <img src="https://raw.githubusercontent.com/fcsest/mercadoedu.tc/main/inst/images/perfil.png" align = "right" height = "100px"/>
 </a>
 
 <h1 align = "center"> Text Classification</h1>

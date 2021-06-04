@@ -1,15 +1,9 @@
----
-title: "Text Classification"
-output: github_document
----
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = here::here(),
   out.width = "100%"
 )
 render_toc <- function(
@@ -72,27 +66,20 @@ code span.st {
     color: #09e2c5;
 }
 ```
-
-<a href="https://mercadoedu.com.br">
-    <img src="./inst/images/slogan.png" align = "left" height = "59px"/>
-</a>
-<a href="https://tawk.to/fcs.est">
-  <img src="./inst/images/perfil.png" align = "right" height = "100px"/>
-</a>
-
-<h1 align = "center"> Text Classification</h1>
+# Classificação de texto dos nomes de cursos
 
 Repositório do modelo de classificação de texto dos nomes de cursos de graduação, utilizando o algoritmo [TF-IDF](https://textrecipes.tidymodels.org/reference/step_tfidf.html) da biblioteca [textrecipes](https://textrecipes.tidymodels.org/).
 
 <!-- badges: start -->
-<a href="https://github.com/fcsest/mercadoedu.tc">
-  <img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" align = "right" style = "margin-top: -15px; margin-right: 40px;"/>
-</a>
+
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
+
 
 # Sumário
 ```{r toc, echo=FALSE}
-render_toc(filename = "./README.Rmd",
+render_toc(filename = "./index.Rmd",
            toc_header_name = "Sumário",
            base_level = 2,
            toc_depth = 4)

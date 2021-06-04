@@ -1,32 +1,46 @@
+title: "Text Classification"
 destination: docs
+
 template:
+  opengraph:
+    image:
+      src: "https://raw.githubusercontent.com/fcsest/mercadoedu.tc/main/inst/images/slogan.png"
+      alt: "mercadoedu's text classification model"
+    twitter:
+      creator: "@fcsest"
+      site: "@mercadoedu"
+      card: summary_large_image
   params:
-    bootswatch: cerulean
+    bootswatch: darkly
+
 
 navbar:
   structure:
     left:
     - home
-    - reports
+    - articles
     - reference
     right: github
   components:
     home:
+      text: Home
       icon: fas fa-home fa-lg
       href: index.html
+    articles:
+      text: Reports
+      menu:
+      - text: Análise Exploratória
+        href: articles/eda_report.html
+      - text: Modelagem com {tidymodels}
+        href: articles/model_report.html
     reference:
       text: Reference
       href: reference/index.html
     github:
       icon: fab fa-github fa-lg
-      href: https://github.com/curso-r/cafecomdados/
-    articles:
-      text: Articles
-      menu:
-      - text: Análise Exploratória
-        href: articles/cafe_com_dados_eda.html
-      - text: Modelagem com {tidymodels}
-        href: articles/cafe_com_dados_modelage.html
-    slides:
-      text: Slides
-      href: https://curso-r.github.io/cafecomdados/articles/slides.html#1
+      href: https://github.com/fcsest/mercadoedu.tc/
+
+authors:
+  Fernando Souza:
+    href: "http://fcsest.github.io"
+    html: "<img src='https://raw.githubusercontent.com/fcsest/mercadoedu.tc/main/inst/images/perfil.png' height = '100px'/>"
