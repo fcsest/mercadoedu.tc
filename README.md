@@ -12,9 +12,8 @@ Text Classification
 </h1>
 
 Repositório do modelo de classificação de texto dos nomes de cursos de
-graduação, utilizando o algoritmo
-[TF-IDF](https://textrecipes.tidymodels.org/reference/step_tfidf.html)
-da biblioteca [textrecipes](https://textrecipes.tidymodels.org/).
+graduação, utilizando a biblioteca
+[tidymodels](https://tidymodels.org/).
 
 <!-- badges: start -->
 

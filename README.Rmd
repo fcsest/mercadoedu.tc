@@ -63,7 +63,7 @@ render_toc <- function(
 
 <h1 align = "center"> Text Classification</h1>
 
-Repositório do modelo de classificação de texto dos nomes de cursos de graduação, utilizando o algoritmo [TF-IDF](https://textrecipes.tidymodels.org/reference/step_tfidf.html) da biblioteca [textrecipes](https://textrecipes.tidymodels.org/).
+Repositório do modelo de classificação de texto dos nomes de cursos de graduação, utilizando a biblioteca [tidymodels](https://tidymodels.org/).
 
 <!-- badges: start -->
 <a href="https://github.com/fcsest/mercadoedu.tc">
