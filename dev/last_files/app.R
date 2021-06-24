@@ -154,6 +154,11 @@ server <- function(input, output) {
     # Collapse all rows
     reactable::updateReactable("table", expanded = FALSE)
   })
+
+  observeEvent(input$collapse_btn, {
+    # Collapse all rows
+    reactable::updateReactable("table", expanded = FALSE)
+  })
 }
 
 shiny::shinyApp(ui, server, options = list("launch.browser" = T))

@@ -42,5 +42,8 @@ navbar:
 
 authors:
   Fernando Souza:
-    href: "http://fcsest.github.io"
-    html: "<img src='https://raw.githubusercontent.com/fcsest/mercadoedu.tc/main/inst/images/perfil.png' height = '100px'/>"
+    href: http://fcsest.github.io
+    html: <img src="https://raw.githubusercontent.com/fcsest/mercadoedu.tc/main/inst/images/perfil.png"/>
+  mercadoedu:
+    href: http://mercadoedu.com.br
+    html: <img src="https://raw.githubusercontent.com/fcsest/mercadoedu.tc/main/inst/images/slogan.png"/>

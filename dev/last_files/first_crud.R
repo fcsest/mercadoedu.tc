@@ -30,112 +30,14 @@ c("First",
   FCSUtils::title_ascii(text_color = "blue")
 #----------------------------------------------------------#
 
-### coursealias database(labels from mercadoedu) ####
-csalias <- conex_RDS |>
-  dplyr::tbl("coursealias") |>
-  dplyr::rename("alias_id" = id) |>
-  dplyr::filter(name != "N/C") |>
-  dplyr::arrange(name) |>
-  dplyr::collect()
+all_dbs <- conex_RDS |>
+  mercadoedu.tc::mount_frankenstein(stopwords_con = conex_MODEL)
 
-### course database(censo data) ####
-cs <- conex_RDS |>
-  dplyr::tbl("course") |>
-  dplyr::select(name,
-                name_detail,
-                alias_id,
-                "cs_id" = id) |>
-  dplyr::arrange(alias_id) |>
-  dplyr::collect()
-
-### pricing_course database(labels from quarentine) ####
-pc <- conex_RDS |>
-  dplyr::tbl("pricing_course") |>
-  dplyr::select("pc_discr_id" = id,
-                alias_id,
-                name_detail = name,
-                "pc_human_match" = human_match) |>
-  dplyr::filter(!is.na(alias_id)) |>
-  dplyr::distinct() |>
-  dplyr::collect()
-
-### fromtokey database(course names from robots) ####
-ftk <- conex_RDS |>
-  dplyr::tbl("me_v3_pricing_fromtokey") |>
-  dplyr::filter(discr == "pricing_course_level_1",
-                arg != "n/c",
-                arg != "-new-") |>
-  dplyr::select("name_detail" = arg,
-                "ftk_robot_id" = robot_id,
-                "ftk_discr_id" = discr_id) |>
-  dplyr::distinct() |>
-  dplyr::collect() |>
-  dplyr::left_join(pc |>
-                     dplyr::select(alias_id,
-                                   pc_discr_id),
-                   by = c("ftk_discr_id" = "pc_discr_id")) |>
-  dplyr::filter(!is.na(alias_id))
-
-### coursealias(labels from mercadoedu) with course(censo data) ####
-csalias_cs <- csalias |>
-  dplyr::left_join(cs |>
-                     dplyr::select(-name),
-                   by = "alias_id") |>
-  dplyr::mutate("source" = "course")
-
-### IN coursealias(labels from mercadoedu) AND NOT IN course(censo) ####
-anti_csalias_cs <- csalias |>
-  dplyr::anti_join(cs,
-                   by = "alias_id")
-
-### IN course(censo) AND NOT IN coursealias(labels from mercadoedu) ####
-anti_cs_csalias <- cs |>
-  dplyr::anti_join(csalias,
-                   by = "alias_id")
-
-### csalias(labels from mercadoedu)  with pricing_course(labels from quarentine) ####
-csalias_pc <- csalias |>
-  dplyr::left_join(pc,
-                   by = "alias_id") |>
-  dplyr::mutate("source" = "pricing_course")
-
-### IN coursealias(labels from mercadoedu) AND NOT IN pricing_course(labels from quarentine) ####
-anti_csalias_pc <- csalias |>
-  dplyr::anti_join(pc,
-                   by = "alias_id")
-
-### IN pricing_course(labels from quarentine) AND NOT IN coursealias(labels from mercadoedu) ####
-anti_pc_csalias <- pc |>
-  dplyr::anti_join(csalias,
-                   by = "alias_id")
-
-### csalias(labels from mercadoedu) with fromtokey(course names from robots) ####
-csalias_ftk <- csalias |>
-  dplyr::left_join(ftk,
-                   by = "alias_id") |>
-  dplyr::mutate("source" = "fromtokey")
-
-### IN coursealias(labels from mercadoedu) AND NOT IN fromtokey(course names from robots) ####
-anti_csalias_ftk <- csalias |>
-  dplyr::anti_join(ftk,
-                   by = "alias_id")
-
-### IN fromtokey(course names from robots) AND NOT IN coursealias(labels from mercadoedu) ####
-anti_ftk_csalias <- ftk |>
-  dplyr::anti_join(csalias,
-                   by = "alias_id")
-
-all_dbs <- csalias_cs |>
-  dplyr::bind_rows(csalias_pc,
-                   csalias_ftk) |>
-  dplyr::arrange(alias_id)
-
-all_dbs_dist <- all_dbs |>
-  dplyr::distinct(alias_id,
-                  name,
-                  name_detail,
-                  source)
-
+# all_dbs_dist <- all_dbs |>
+#   dplyr::distinct(alias_id,
+#                   name,
+#                   name_detail,
+#                   source)
 
 #--------------------------------------------------------------------------------------------------#
 #--------------------------------------------------------------------------------------------------#
@@ -145,22 +47,6 @@ c("Check",
   "Databases") |>
   FCSUtils::title_ascii(text_color = "blue")
 #----------------------------------------------------------#
-
-### Stopwords ####
-db_stopwords <- conex_MODEL |>
-  dplyr::tbl("model_stopwords") |>
-  dplyr::pull("words")
-
-### First database ####
-check_all_dbs <- all_dbs |>
-  dplyr::mutate("clean_name" = name_detail |>
-                  mercadoedu.tc::correct_strings() |>
-                  stringr::str_replace_all("([:punct:])|([:digit:])|(\\|)|(ª)|(º)|(°)",
-                                           " ") |>
-                  stringr::str_to_lower(locale = "br") |>
-                  tm::removeWords(db_stopwords) |>
-                  stringr::str_squish()) |>
-  dplyr::arrange(clean_name)
 
 ### clean_name blanks ####
 check_1_all_dbs <- check_all_dbs |>
