@@ -6,6 +6,12 @@
 #'
 #' @param stopwords_con A database connection of stopwords table;
 #'
+#' #' @param stopwords_tbl_name A string of table name in database;\strong{
+#' ```
+#' Default: "model_stopwords"
+#' ```
+#' }
+#'
 #' @param checks A logical that defines when to check tables;\strong{
 #' ```
 #' Default: FALSE
@@ -43,6 +49,7 @@
 #' @importFrom tm removeWords
 mount_frankenstein <- function(con,
                                stopwords_con,
+                               stopwords_tbl_name = "model_stopwords",
                                checks = FALSE) {
   FCSUtils::ui_start(function_name = "mercadoedu.tc::mount_frankenstein",
                      title = "Mount frankenstein table",
@@ -116,7 +123,7 @@ mount_frankenstein <- function(con,
       "coursealias + fromtokey") |>
     FCSUtils::ui_info_list(header = "Appending joined tables below...")
 
-  con |>
+  frank <- con |>
     get_csalias() |>
     dplyr::left_join(con |>
                        get_cs() |>
@@ -147,7 +154,7 @@ mount_frankenstein <- function(con,
                                              " ") |>
                     stringr::str_to_lower(locale = "br") |>
                     tm::removeWords(stopwords_con |>
-                                      get_stopwords() |>
+                                      get_stopwords(tbl_name = stopwords_tbl_name) |>
                                       dplyr::pull(words)) |>
                     stringr::str_squish()) |>
     dplyr::select(alias_id,
@@ -158,4 +165,52 @@ mount_frankenstein <- function(con,
                   dplyr::everything()) |>
     dplyr::arrange(clean_name,
                    alias_id)
+
+  if (nrow(frank) > 1) {
+    "Frankenstein table successfully mounted!!" |>
+      FCSUtils::ui_success()
+
+    FCSUtils::ui_end("mercadoedu.tc::mount_frankenstein")
+
+    invisible(frank)
+  }
+  else {
+    paste("The",
+          FCSUtils::ui_color_warning("con"),
+          "parameter must be a valid connection, test it first;") |>
+      c(paste("The",
+              FCSUtils::ui_color_warning("stopwords_con"),
+              "parameter must be a valid connection too, test it first;"),
+        paste("The",
+              FCSUtils::ui_color_warning("stopwords_tbl_name"),
+              "parameter must be the name of an existing table in the database;")) |>
+      FCSUtils::ui_error_list(header = "Something goes wrong, you may have done something wrong:")
+
+    FCSUtils::ui_end("mercadoedu.tc::mount_frankenstein")
+
+    invisible(FALSE)
+  }
+}
+
+mount_frank_dups <- function(frank_db) {
+  ### clean_name blanks ####
+  check_blanks <- frank_db |>
+    dplyr::filter(clean_name == "" | clean_name == " ")
+
+  if (nrow(check_blanks) > 0) {
+    mercadoedu.tc::ui_warning("Frankenstein has normalized names that are blank!!")
+
+    check_blanks
+  }
+
+  frank_db |>
+    dplyr::select(alias_id,
+                  name,
+                  name_detail,
+                  clean_name) |>
+    dplyr::filter(clean_name != "" | clean_name != " ") |>
+    dplyr::group_by(clean_name) |>
+    dplyr::filter(dplyr::n_distinct(name) > 1) |>
+    dplyr::ungroup() |>
+    dplyr::arrange(clean_name)
 }
